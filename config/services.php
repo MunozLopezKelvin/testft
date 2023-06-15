@@ -33,7 +33,7 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_OAUTH_ID'),
         'client_secret' => env('GOOGLE_OAUTH_KEY'),
-        'redirect' => '/google-callback',
+        'redirect' => ('GOOGLE_REDIRECT_URI'),
     ],
     'facebook' => [    
         'client_id' => env('FACEBOOK_CLIENT_ID'),  
