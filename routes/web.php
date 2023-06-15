@@ -41,3 +41,12 @@ Route::get('/google-callback', function () {
     return redirect('/dashboard');
     // $user->token
 });
+
+Route::get('/login-facebook', function () {
+    return Socialite::driver('facebook')->redirect();
+});
+
+Route::get('/facebook-callback', function () {
+    $user = Socialite::driver('facebook')->user();
+    dd($user);
+});
