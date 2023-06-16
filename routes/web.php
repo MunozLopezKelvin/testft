@@ -46,7 +46,7 @@ Route::get('/login-facebook', function () {
     return Socialite::driver('facebook')->redirect();
 });
 
-Route::get('https://testft-production.up.railway.app/facebook-callback', function () {
+Route::get('/facebook-callback', function () {
     $user = Socialite::driver('facebook')->user();
     $userExists = User::where('external_id', $user->id)->where('external_auth', 'facebook')->exists();
 
