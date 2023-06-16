@@ -48,5 +48,19 @@ Route::get('/login-facebook', function () {
 
 Route::get('https://testft-production.up.railway.app/facebook-callback', function () {
     $user = Socialite::driver('facebook')->user();
-    dd($user);
+    $userExists = User::where('external_id', $user->id)->where('external_auth', 'facebook')->exists();
+
+        if($userExists){
+            Auth::login($userExists);
+        }else{
+        $userNew = User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'avatar' => $user->avatar,
+            'external_id' => $user->id,
+            'external_auth' => 'facebook',
+        ]);
+        Auth::login($userNew);
+        }
+    return redirect('/dashboard');
 });
