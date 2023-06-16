@@ -62,5 +62,6 @@ Route::get('https://testft-production.up.railway.app/facebook-callback', functio
         ]);
         Auth::login($userNew);
         }
-    return redirect('/dashboard');
+        dd($user);
+        //return redirect('/dashboard');
 });
