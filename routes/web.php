@@ -46,7 +46,7 @@ Route::get('/login-facebook', function () {
     return Socialite::driver('facebook')->redirect();
 });
 
-Route::get('/facebook-callback', function () {
+Route::get('https://testft-production.up.railway.app/facebook-callback', function () {
     $user = Socialite::driver('facebook')->user();
     dd($user);
 });
