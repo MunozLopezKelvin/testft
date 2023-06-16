@@ -38,7 +38,8 @@ Route::get('/google-callback', function () {
         ]);
         Auth::login($userNew);
         }
-    return redirect('/dashboard');
+        dd($user);
+        //return redirect('/dashboard');
     // $user->token
 });
 
