@@ -19,16 +19,20 @@ Route::get('/', function () {
 });
 
 Route::get('/login-google', function () {
+    //Llamamos a los servicios de Google para que envíe a la página de consentimiento al cliente.
     return Socialite::driver('google')->redirect();
 });
  
 Route::get('/google-callback', function () {
+    //Los datos de usuario que nos regresa Google los almacenamos en $user
     $user = Socialite::driver('google')->user();
+    //Utilizando condicionantes y el método exists() validamos si el usuario ya existe en nuestra BD
     $userExists = User::where('external_id', $user->id)->where('external_auth', 'google')->exists();
 
         if($userExists){
-            Auth::login($userExists);
+            Auth::login($user);
         }else{
+        //En caso de que el usuario no exista lo creamos y alacenamos
         $userNew = User::create([
             'name' => $user->name,
             'email' => $user->email,
@@ -36,6 +40,7 @@ Route::get('/google-callback', function () {
             'external_id' => $user->id,
             'external_auth' => 'google',
         ]);
+        //Una vez creado lo enviamos con un login y los datos del usuario
         Auth::login($userNew);
         }
         dd($user);
