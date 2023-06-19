@@ -30,7 +30,7 @@ Route::get('/google-callback', function () {
     $userExists = User::where('external_id', $user->id)->where('external_auth', 'google')->exists();
 
         if($userExists){
-            Auth::login($user);
+            dd($user);
         }else{
         //En caso de que el usuario no exista lo creamos y alacenamos
         $userNew = User::create([
@@ -43,7 +43,7 @@ Route::get('/google-callback', function () {
         //Una vez creado lo enviamos con un login y los datos del usuario
         Auth::login($userNew);
         }
-        dd($user);
+        
         //return redirect('/dashboard');
     // $user->token
 });
