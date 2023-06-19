@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = session('user'); // Obtiene los datos del usuario de la sesión
+
+        return view('home', compact('user'));
     }
 }
