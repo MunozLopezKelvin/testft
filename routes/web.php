@@ -49,7 +49,7 @@ Route::get('/google-callback', function () {
     // $user->token
 });
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/login-facebook', function () {
     return Socialite::driver('facebook')->redirect();
