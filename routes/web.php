@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\HomeController;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,7 @@ Route::get('/google-callback', function () {
     // $user->token
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/login-facebook', function () {
     return Socialite::driver('facebook')->redirect();
