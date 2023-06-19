@@ -48,6 +48,11 @@ Route::get('/google-callback', function () {
     // $user->token
 });
 
+
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
+
+
 Route::get('/login-facebook', function () {
     return Socialite::driver('facebook')->redirect();
 });
