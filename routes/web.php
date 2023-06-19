@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
-use App\Http\Controllers\HomeController;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +30,7 @@ Route::get('/google-callback', function () {
     $userExists = User::where('external_id', $user->id)->where('external_auth', 'google')->exists();
 
         if($userExists){
-            return redirect('/home');
+            Auth::login($user);
         }else{
         //En caso de que el usuario no exista lo creamos y alacenamos
         $userNew = User::create([
@@ -44,12 +43,10 @@ Route::get('/google-callback', function () {
         //Una vez creado lo enviamos con un login y los datos del usuario
         Auth::login($userNew);
         }
-        return redirect('/home');
+        dd($user);
         //return redirect('/dashboard');
     // $user->token
 });
-
-Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/login-facebook', function () {
     return Socialite::driver('facebook')->redirect();
