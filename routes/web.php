@@ -30,7 +30,7 @@ Route::get('/google-callback', function () {
     $userExists = User::where('external_id', $user->id)->where('external_auth', 'google')->exists();
 
         if($userExists){
-            return redirect('/welcome');
+            return redirect('/home');
         }else{
         //En caso de que el usuario no exista lo creamos y alacenamos
         $userNew = User::create([
