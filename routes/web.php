@@ -73,6 +73,3 @@ Route::get('/facebook-callback', function () {
         dd($user);
         //return redirect('/dashboard');
 });
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
